@@ -1,23 +1,8 @@
 package bship;
 
-public class Carrier extends Ships {
+public class Carrier extends Ship {
 
-	public static int carrierLength = 5;
-	public static String shipName = "r";
-
-	@Override
-	public int getLength() {
-		return carrierLength;
+	public Carrier() {
+		super("Carrier", 5);
 	}
-
-	@Override
-	public void setShipName(String shipName) {
-		Cruiser.shipName = shipName;
-	}
-
-	@Override
-	public String getShipName() {
-		return shipName;
-	}
-
 }

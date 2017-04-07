@@ -1,22 +1,8 @@
 package bship;
 
-public class Destroyer extends Ships {
+public class Destroyer extends Ship {
 
-	public static int destroyerLength = 2;
-	public static String shipName = "d";
-	
-	@Override
-	public int getLength() {
-		return destroyerLength;
-	}
-	
-	@Override
-	public void setShipName(String shipName) {
-		Cruiser.shipName = shipName;
-	}
-
-	@Override
-	public String getShipName() {
-		return shipName;
+	public Destroyer() {
+		super("Destroyer", 2);
 	}
 }

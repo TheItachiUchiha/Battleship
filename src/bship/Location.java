@@ -2,14 +2,12 @@ package bship;
 
 public class Location {
 
-	public  static int row;
-	public static  int column;
-
+	private int row;
+	private int column;
 	
 	public void setLocation(int row, int column) {
-		
-		Location.row = row;
-		Location.column = column;
+		this.row = row;
+		this.column = column;
 	}
 	
 	public int getRow() {
@@ -19,7 +17,4 @@ public class Location {
 	public int getColumn() {
 		return column;
 	}
-	
-
-	
 }
