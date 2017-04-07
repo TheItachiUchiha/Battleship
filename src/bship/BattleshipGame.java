@@ -4,7 +4,7 @@ public class BattleshipGame {
 
 	public static void main(String[] args) {
 
-		Player playerTwo = new Player2();
+		Player playerTwo = new Player();
 		Player playerOne = new Player();
 		Board board = new Board(playerOne);
 		Board board2 = new Board(playerTwo);
