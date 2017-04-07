@@ -106,10 +106,7 @@ public class Player {
 		setGridColumn(secondGuess);
 
 	}
-	/*
-	 * public void ifShipSunk() { if (ship.getShipSunk()) System.out.println(
-	 * "Ship has been sunk"); }
-	 */
+	
 
 	public void setGridColumn(int secondGuess) {
 		this.secondGuess = secondGuess;
