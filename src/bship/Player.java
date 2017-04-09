@@ -1,28 +1,37 @@
 package bship;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
 
-	public Ships ship = new Ships();
-	public Board board;
-	public String playerName;
-	public boolean hit;
-	public boolean miss;
-	public Cruiser cruiser = new Cruiser();
-	public Destroyer destroyer = new Destroyer();
-	public Carrier carrier = new Carrier();
-	public Submarine submarine = new Submarine();
-	public Battleship battleship = new Battleship();
-	public static int length;
-	public static String currentShip;
-	private int firstGuess;
-	private int secondGuess;
-	Scanner input = new Scanner(System.in);
+    private Board board = new Board();
+    private List<Ship> ships = Arrays.asList(new Cruiser(), new Destroyer(), new Carrier(), new Submarine(), new Battleship());
 
-	public void setName(String playerName) {
-		this.playerName = playerName;
-	}
+	/** The default ship for player is Cruiser.
+	 * They can change it when they want to...
+	 */
+	private Ship ship = new Cruiser();
+
+	private String playerName;
+	private boolean hit;
+	// We don't need this variable?
+	private boolean miss;
+
+    private int firstGuess;
+	private int secondGuess;
+
+	private final Scanner scannerIn = new Scanner(System.in);
+
+    /**
+     * By default all the player have Submarine. They can change it later.
+     * @param name Player name.
+     */
+	public Player (String name) {
+	    this.playerName = name;
+	    this.ship = new Submarine();
+    }
 
 	public String getName() {
 		return playerName;
@@ -30,56 +39,45 @@ public class Player {
 
 	public void selectShip() {
 
-		currentShip = input.nextLine();
-		switch (currentShip) {
-
-		case "Destroyer":
-			length = destroyer.getLength();
-			break;
-		case "Cruiser":
-			length = cruiser.getLength();
-			break;
-		case "Carrier":
-			length = carrier.getLength();
-			break;
-		case "Submarine":
-			length = submarine.getLength();
-			break;
-		case "Battleship":
-			length = battleship.getLength();
-			break;
-		default:
-			System.out.println("There is no ship named as " + currentShip);
+        String currentShipName = scannerIn.nextLine();
+        int i = 0;
+		for (; i < ships.size(); i++) {
+		    if(ships.get(i).getShipName().equalsIgnoreCase(currentShipName)) {
+                ship = ships.get(i);
+                break;
+            }
+        }
+		if (i > ships.size()) {
+			System.out.println("There is no ship named as " + currentShipName);
 		}
 
 	}
 
 	public int getShipLength() {
-		return length;
+		return ship != null ? ship.getLength() : 0;
 	}
 
 	public void setDirection() {
-
-		String direction = input.nextLine();
-		switch (direction) {
-		case "Horizontal":
-			ship.setDirection(Direction.HORIZONTAL);
-			break;
-		case "Vertical":
-			ship.setDirection(Direction.VERTICAL);
-			break;
-		default:
-			System.out.println("There is no direction as " + direction);
-		}
-
+		String direction = scannerIn.nextLine();
+		if (ship != null) {
+            switch (direction) {
+                case "Horizontal":
+                    ship.setDirection(Direction.HORIZONTAL);
+                    break;
+                case "Vertical":
+                    ship.setDirection(Direction.VERTICAL);
+                    break;
+                default:
+                    System.out.println("There is no direction as " + direction);
+            }
+        }
 	}
 
 	public void placeShip() {
-
-		int row = input.nextInt();
-		int column = input.nextInt();
-		input.nextLine();
-		ship.setLocation(row, column);
+		int row = scannerIn.nextInt();
+		int column = scannerIn.nextInt();
+		scannerIn.nextLine();
+		ship.setLocation(new Location(row, column));
 	}
 
 	public void setHit(boolean hit) {
@@ -99,12 +97,10 @@ public class Player {
 	}
 
 	public void guessTheRowAndColumn() {
-
-		firstGuess = input.nextInt();
-		secondGuess = input.nextInt();
+		firstGuess = scannerIn.nextInt();
+		secondGuess = scannerIn.nextInt();
 		setGridRow(firstGuess);
 		setGridColumn(secondGuess);
-
 	}
 	
 
@@ -115,7 +111,10 @@ public class Player {
 
 	public void setGridRow(int firstGuess) {
 		this.firstGuess = firstGuess;
+	}
 
+	public Ship getShip() {
+		return ship;
 	}
 
 	public int getGridRow() {
