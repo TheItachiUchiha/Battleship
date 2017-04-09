@@ -6,13 +6,9 @@ import java.util.Scanner;
 
 public class Player {
 
-    private Board board = new Board();
+    private Board board = new Board(this);
     private List<Ship> ships = Arrays.asList(new Cruiser(), new Destroyer(), new Carrier(), new Submarine(), new Battleship());
-
-	/** The default ship for player is Cruiser.
-	 * They can change it when they want to...
-	 */
-	private Ship ship = new Cruiser();
+	private Ship ship;
 
 	private String playerName;
 	private boolean hit;
